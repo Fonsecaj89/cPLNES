@@ -22,10 +22,7 @@ int main()
         
     }
 
-    for (int i=1000 ;i>=0;i--){
-        
-        printf("%s\n",b[i]);
-    }
+    
     
     return 0;
     

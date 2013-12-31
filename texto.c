@@ -3,7 +3,6 @@
 #include <string.h>
 #include "texto.h"
 
-
 char* abrir_archivo(char *filename)
 {
    char *buffer = NULL;
@@ -39,39 +38,29 @@ char* abrir_archivo(char *filename)
 }
 
 
-/*void palabra(const char *string) {
-    // Make a local copy of the string that we can manipulate.
-    char * const copy = strdup(string);
-    char *space = copy;
-    // Find the next space in the string, and replace it with a newline.
-    while (space = strchr(space,' ')) *space = '\n';
-    // There are no more spaces in the string; print out our modified copy.
-    printf("%s\n", copy);
-    // Free our local copy
-    free(copy);
-    }*/
-
-char* tokenizar(char *string)
+char** tokenizar(char *string)
 {
-    char * pch;
-    pch = strtok(string," ,.-");
-    while (pch != NULL)
+        /*  char *array[1000000];
+    int i;
+         printf("%s\n",string);
+    
+    array[i] = strtok(string," ,.\r\n");
+    
+    while(array[i])
     {
-        printf("%s\n",pch);
-        pch = strtok(NULL, " ,.-");
+        array[++i] = strtok(NULL," ,.\r\n");
+        if(array[i]=='\0')
+            break;
+        printf("%s\n",array[i]);
     }
-    return pch;
-}
+    return array[800];
 
-char** parrafo(char *string) {
-   
-    char ** res  = NULL;
-    char *  p    = strtok (string, "\n");
+*/
+    char ** res;
+    char *  p    = strtok (string, " ,.\r\n");
     int n_spaces = 0, i;
 
-
     /* split string and append tokens to 'res' */
-
     while (p) {
         res = realloc (res, sizeof (char*) * ++n_spaces);
 
@@ -79,10 +68,82 @@ char** parrafo(char *string) {
             exit (-1); /* memory allocation failed */
 
         res[n_spaces-1] = p;
+        p = strtok (NULL, " ,.\r\n");
+    }
+       
+    return res;
+}
 
+
+char** parrafo(char *string) {
+   
+    char ** res;
+    char *  p    = strtok (string, "\n");
+    int n_spaces = 0, i;
+
+    /* split string and append tokens to 'res' */
+    while (p) {
+        res = realloc (res, sizeof (char*) * ++n_spaces);
+
+        if (res == NULL)
+            exit (-1); /* memory allocation failed */
+
+        res[n_spaces-1] = p;
         p = strtok (NULL, "\n");
     }
-
+       
     return res;
+}
+
+void prueba()
+{
+    char *a = abrir_archivo("1816_La-guardia-blanca_Arthur-Conan-Doyle.txt");
+
+        /*char** (*ptoken)(char*);
+    ptoken = tokenizar;
+    char** token = ptoken(a);
+    for(int i = 0; i < strlen(token); i++)
+    {
+        printf("%s\n",token[i]);
+    }
+        */
+
+    char *array[1000000];
+    int i;
+    printf("%s\n",a);
     
+    array[i] = strtok(a," ,.");
+    
+    while(array[i])
+    {
+        array[++i] = strtok(NULL," ,.");
+        if(array[i]=='\0')
+            break;
+        printf("%s\n",array[i]);
+       
+    }
+    
+    
+}
+
+void concatenar()
+{
+        /* int espacio = 0;
+    char * cadena;
+    char *a = abrir_archivo("datos.txt");
+    char** (*ptoken)(char*);
+    ptoken = tokenizar;
+    char** token = ptoken(a);
+   
+    
+    for(int i = 0; i < strlen(token); i++)
+    {
+        if(token[i] == "\r")
+        {
+            espacio+=1;
+        }
+        printf("%d %s\n",espacio,token[i]);
+   
+    }
+        */
 }
