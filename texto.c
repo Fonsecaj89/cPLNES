@@ -9,7 +9,6 @@ void abrir_archivo(char * filename)
 {
  
     fp = fopen(filename, "r"); // open file for reading
-    printf("Archivo abierto: %s\n",filename);
     
     if (fp == NULL)
     // attempt failed
@@ -18,14 +17,13 @@ void abrir_archivo(char * filename)
         exit(1);
         // quit program
     }
-
-    
+   
 }
 
 void cerrar_archivo()
 {
     fclose(fp);
-    printf("Archivo cerrado");
+
 }
 
 char** tokenizar(char *string)
