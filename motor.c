@@ -13,8 +13,9 @@ int main()
     int ch;
     abrir_archivo("datos.txt");
     printf("Puntero del archivo %p\n",fp);
-    while ((ch = getc(fp)) != EOF)
-        putchar(ch);
+
+    tokenizar();
+    
     cerrar_archivo();
     printf("Puntero del archivo %p\n",fp);
 

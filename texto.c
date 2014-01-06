@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h> // for isspace()
+#include <stdbool.h> // for bool, true, false
 #include "texto.h"
 
 
@@ -23,64 +25,51 @@ void abrir_archivo(char * filename)
 void cerrar_archivo()
 {
     fclose(fp);
-
 }
 
-char** tokenizar(char *string)
+void tokenizar()
 {
-
-    char ** res;
-    char *  p    = strtok (string, " ,.\r\n");
-    int n_spaces = 0,i;
-
-    /* split string and append tokens to 'res' */
-    while (p) {
-        res = realloc (res, sizeof (char*) * ++n_spaces);
-
-        if (res == NULL)
-            exit (-1); /* memory allocation failed */
-
-        res[n_spaces-1] = p;
-        p = strtok (NULL, " ,.\r\n");
-        printf("%s\n",p);
+    
+    char caracteres;
+    char *con;
+    long n_chars = 0L;
+    
+            /*char prev;
+    
+    int n_lines = 0;
+    int n_words = 0;
+    int p_lines = 0;
+    int 
+    bool inword = false;
+    printf("Enter text to be analyzed (| to terminate):\n");
+    prev = '\n';
+        */
+    while ((caracteres = getc(fp)) != EOF)
+    {
+        *con = *con + caracteres;
+        printf("%d\n",con[n_chars++]);
         
+            /*
+        n_chars++;
+
+        if (caracteres == '\n')
+            n_lines++;
+
+        if (!isspace(caracteres) && !inword)
+        {
+            inword = true; // starting a new word
+            n_words++;
+        }
+        
+        if (isspace(caracteres) && inword)
+            inword = false; // reached end of word
+        prev = caracteres;*/
+        
+
     }
-       
-    return res;
+        /*if (prev != '\n')
+        p_lines = 1;
+    printf("characters = %ld, words = %d, lines = %d, ",n_chars, n_words, n_lines);
+    printf("partial lines = %d\n", p_lines);*/
+
 }
-
-/*
-char** parrafo(char *stringp) {
-   
-    char ** res;
-    char *  p    = strtok (stringp, " ,.\r\n");
-    int n_spaces = 0, i;
-
-  
-    while (p) {
-        res = realloc (res, sizeof (char*) * ++n_spaces);
-
-        if (res == NULL)
-            exit (-1); 
-
-        res[n_spaces-1] = p;
-        p = strtok (NULL, " ,.\r\n");
-    }
-       
-    return res;
-    
-}
-*/
-/*int frecuencia(char *t)
-{
-
-    
-    char *a;
-    a = tokenizar(t);
-    printf("Todo bien");
-    return 0;
-    
-}
-
-
-*/
