@@ -1,8 +1,8 @@
-char* abrir_archivo(char *filename);
+extern FILE * fp;
+void abrir_archivo(char *aa_filename);
+void cerrar_archivo();
 char** tokenizar(char *string);
 char** parrafo(char *string);
-void prueba();
-void concatenar();
-
+int frecuencia(char *string);
 
 
