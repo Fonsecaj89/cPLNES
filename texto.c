@@ -30,9 +30,22 @@ void cerrar_archivo()
 
 void obtener_texto()
 {
+
+        int n_caracteres = 0;
+    int n_lineas = 0;
+    int n_palabras = 0;
+    int n_retornoc = 0;
+    bool estado;
+
+
+
+
+
+
+    
    unsigned int len_max = 128;
     unsigned int current_size = 0;
-
+    char caracter;
     char *pStr = malloc(len_max);
     current_size = len_max;
 
@@ -40,12 +53,12 @@ void obtener_texto()
 
     if(pStr != NULL)
     {
-    int c = EOF;
+
     unsigned int i =0;
         //accept user input until hit enter or end of file
-    while ((caracteres = getc(fp)) != EOF)
+    while ((caracter = getc(fp)) != EOF)
     {
-        pStr[i++]=(char)c;
+        pStr[i++]=(char)caracter;
 
         //if i reached maximize size then realloc size
         if(i == current_size)
@@ -53,15 +66,43 @@ void obtener_texto()
                         current_size = i+len_max;
             pStr = realloc(pStr, current_size);
         }
-    }
+
+
+/*************************/
+        
+        //Conteo de caracteres
+        ++n_caracteres;
+        //Conteo de lineas
+        if(caracter == '\n')
+            ++n_lineas;
+        //Conteo de retorno de carro
+        if(caracter == '\r')
+            ++n_retornoc;
+        
+        //conteo de palabras
+        if(caracter == ' ' || caracter == '\n' || caracter == '\t')
+        {
+            estado = false;
+        }
+        else
+        {
+            estado = true;
+            ++n_palabras;
+            
+        }
+
+
+   
+    }//<------este se queda
+        printf("Nº de caracteres %d, Nº lineas %d, Nº retorno %d, Nº palabras %d\n",n_caracteres,n_lineas,n_retornoc,n_palabras);
+/*************************/
 
     pStr[i] = '\0';
 
-        printf("\nLong String value:%s \n\n",pStr);
+    printf("\nLong String value: \n\n %s \n\n",pStr);
         //free it 
     free(pStr);
     pStr = NULL;
-
 
     }
     
@@ -74,16 +115,12 @@ void tokenizar()
     int n_lineas = 0;
     int n_palabras = 0;
     int n_retornoc = 0;
-    char * str;
-    
     bool estado;
     
-    str = obtener_texto();
-    printf("%s\n",str);
     
     while ((caracteres = getc(fp)) != EOF)
     {
-        agregar_a_cadena(cadena,caracteres);
+      
         
         
         //Conteo de caracteres

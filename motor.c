@@ -15,7 +15,8 @@ int main()
 {
 
     int ch;
-    abrir_archivo("1816_La-guardia-blanca_Arthur-Conan-Doyle.txt");
+    abrir_archivo("datos.txt");
+    obtener_texto();
     tokenizar();
 
     return 0;
