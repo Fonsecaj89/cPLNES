@@ -8,6 +8,12 @@
 
 
 FILE * fp;
+char * pStr;
+char caracteres;
+int n_palabras = 0;
+int n_lineas = 0;
+int n_caracteres = 0;
+
 void abrir_archivo(char * filename)
 {
  
@@ -30,35 +36,20 @@ void cerrar_archivo()
 
 void obtener_texto()
 {
-
-        int n_caracteres = 0;
-    int n_lineas = 0;
-    int n_palabras = 0;
-    int n_retornoc = 0;
-    bool estado;
-
-
-
-
-
-
-    
-   unsigned int len_max = 128;
+    unsigned int len_max = 128;
     unsigned int current_size = 0;
-    char caracter;
     char *pStr = malloc(len_max);
+    char caracteres;
     current_size = len_max;
-
-    printf("\nEnter a very very very long String value:");
 
     if(pStr != NULL)
     {
 
     unsigned int i =0;
         //accept user input until hit enter or end of file
-    while ((caracter = getc(fp)) != EOF)
+    while ((caracteres = getc(fp)) != EOF)
     {
-        pStr[i++]=(char)caracter;
+        pStr[i++]=(char)caracteres;
 
         //if i reached maximize size then realloc size
         if(i == current_size)
@@ -66,83 +57,77 @@ void obtener_texto()
                         current_size = i+len_max;
             pStr = realloc(pStr, current_size);
         }
-
-
-/*************************/
-        
-        //Conteo de caracteres
-        ++n_caracteres;
-        //Conteo de lineas
-        if(caracter == '\n')
-            ++n_lineas;
-        //Conteo de retorno de carro
-        if(caracter == '\r')
-            ++n_retornoc;
-        
-        //conteo de palabras
-        if(caracter == ' ' || caracter == '\n' || caracter == '\t')
-        {
-            estado = false;
-        }
-        else
-        {
-            estado = true;
-            ++n_palabras;
-            
-        }
-
-
-   
-    }//<------este se queda
-        printf("Nº de caracteres %d, Nº lineas %d, Nº retorno %d, Nº palabras %d\n",n_caracteres,n_lineas,n_retornoc,n_palabras);
-/*************************/
+        obtener_total_palabras(caracteres);
+        obtener_total_lineas(caracteres);
+        obtener_total_caracteres(caracteres);
+       
+    }
 
     pStr[i] = '\0';
 
     printf("\nLong String value: \n\n %s \n\n",pStr);
-        //free it 
+    size_t tamanio;
+    tamanio = strlen(pStr);
+    
+    printf("Tamaño del string %d\n",tamanio);
+    
+    }
+}
+
+void limpiar_pStr()
+{
     free(pStr);
     pStr = NULL;
-
-    }
+    printf("Listo, memory limpiada\n");
     
+}
+
+void obtener_total_palabras(char ctp)
+{
+    bool estado;
+    
+    if(ctp == ' ' || ctp == '\n' || ctp == '\t')
+    {
+        estado = false;
+    }
+    else
+    {
+        estado = true;
+        ++n_palabras;
+    }
+//    return n_palabras;
+}
+
+void obtener_total_lineas(char ctl)
+{
+    //Conteo de lineas
+    if(ctl == '\n')
+        ++n_lineas;
+        //return n_lineas;
+}
+
+void obtener_total_caracteres(char ctc)
+{
+    //Conteo de caracteres
+    ++n_caracteres;
+        //   return n_caracteres;
+}
+
+
+int total_palabras()
+{
+    return n_palabras;
+}
+int total_lineas()
+{
+    return n_lineas;
+}
+int total_caracteres()
+{
+    return n_caracteres;
 }
 
 void tokenizar()
 {
-    char caracteres;
-    int n_caracteres = 0;
-    int n_lineas = 0;
-    int n_palabras = 0;
-    int n_retornoc = 0;
-    bool estado;
-    
-    
-    while ((caracteres = getc(fp)) != EOF)
-    {
-      
-        
-        
-        //Conteo de caracteres
-        ++n_caracteres;
-        //Conteo de lineas
-        if(caracteres == '\n')
-            ++n_lineas;
-        //Conteo de retorno de carro
-        if(caracteres == '\r')
-            ++n_retornoc;
-        
-        //conteo de palabras
-        if(caracteres == ' ' || caracteres == '\n' || caracteres == '\t')
-        {
-            estado = false;
-        }
-        else
-        {
-            estado = true;
-            ++n_palabras;
-            
-        }
-    }
-    printf("Nº de caracteres %d, Nº lineas %d, Nº retorno %d, Nº palabras %d\n",n_caracteres,n_lineas,n_retornoc,n_palabras);
+
 }
