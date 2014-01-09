@@ -1,0 +1,17 @@
+#include <stdio.h>
+#include <string.h>
+#include "auxiliar.h"
+
+void agregar_a_cadena(char* cadena, char letra)
+{
+    int len;
+    len = strlen(cadena);
+    s[len] = letra;
+}
+
+void final_cadena(char * cadena_completa)
+{
+    int len;
+    len = strlen(cadena_completa);
+    s[len] = '\0';
+}

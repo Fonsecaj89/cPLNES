@@ -5,20 +5,18 @@
 
 
 #include <stdio.h>
+#include <stdbool.h>
+#include <string.h>
 #include "texto.h"
+#include "auxiliar.h"
 
 
 int main()
 {
+
     int ch;
-    abrir_archivo("datos.txt");
-    printf("Puntero del archivo %p\n",fp);
-
+    abrir_archivo("1816_La-guardia-blanca_Arthur-Conan-Doyle.txt");
     tokenizar();
-    
-    cerrar_archivo();
-    printf("Puntero del archivo %p\n",fp);
-
 
     return 0;
 

@@ -4,6 +4,7 @@
 #include <ctype.h> // for isspace()
 #include <stdbool.h> // for bool, true, false
 #include "texto.h"
+#include "auxiliar.h"
 
 
 FILE * fp;
@@ -27,49 +28,84 @@ void cerrar_archivo()
     fclose(fp);
 }
 
-void tokenizar()
+void obtener_texto()
 {
-    
-    char caracteres;
-    char *con;
-    long n_chars = 0L;
-    
-            /*char prev;
-    
-    int n_lines = 0;
-    int n_words = 0;
-    int p_lines = 0;
-    int 
-    bool inword = false;
-    printf("Enter text to be analyzed (| to terminate):\n");
-    prev = '\n';
-        */
+   unsigned int len_max = 128;
+    unsigned int current_size = 0;
+
+    char *pStr = malloc(len_max);
+    current_size = len_max;
+
+    printf("\nEnter a very very very long String value:");
+
+    if(pStr != NULL)
+    {
+    int c = EOF;
+    unsigned int i =0;
+        //accept user input until hit enter or end of file
     while ((caracteres = getc(fp)) != EOF)
     {
-        *con = *con + caracteres;
-        printf("%d\n",con[n_chars++]);
-        
-            /*
-        n_chars++;
+        pStr[i++]=(char)c;
 
-        if (caracteres == '\n')
-            n_lines++;
-
-        if (!isspace(caracteres) && !inword)
+        //if i reached maximize size then realloc size
+        if(i == current_size)
         {
-            inword = true; // starting a new word
-            n_words++;
+                        current_size = i+len_max;
+            pStr = realloc(pStr, current_size);
         }
-        
-        if (isspace(caracteres) && inword)
-            inword = false; // reached end of word
-        prev = caracteres;*/
-        
+    }
+
+    pStr[i] = '\0';
+
+        printf("\nLong String value:%s \n\n",pStr);
+        //free it 
+    free(pStr);
+    pStr = NULL;
+
 
     }
-        /*if (prev != '\n')
-        p_lines = 1;
-    printf("characters = %ld, words = %d, lines = %d, ",n_chars, n_words, n_lines);
-    printf("partial lines = %d\n", p_lines);*/
+    
+}
 
+void tokenizar()
+{
+    char caracteres;
+    int n_caracteres = 0;
+    int n_lineas = 0;
+    int n_palabras = 0;
+    int n_retornoc = 0;
+    char * str;
+    
+    bool estado;
+    
+    str = obtener_texto();
+    printf("%s\n",str);
+    
+    while ((caracteres = getc(fp)) != EOF)
+    {
+        agregar_a_cadena(cadena,caracteres);
+        
+        
+        //Conteo de caracteres
+        ++n_caracteres;
+        //Conteo de lineas
+        if(caracteres == '\n')
+            ++n_lineas;
+        //Conteo de retorno de carro
+        if(caracteres == '\r')
+            ++n_retornoc;
+        
+        //conteo de palabras
+        if(caracteres == ' ' || caracteres == '\n' || caracteres == '\t')
+        {
+            estado = false;
+        }
+        else
+        {
+            estado = true;
+            ++n_palabras;
+            
+        }
+    }
+    printf("Nº de caracteres %d, Nº lineas %d, Nº retorno %d, Nº palabras %d\n",n_caracteres,n_lineas,n_retornoc,n_palabras);
 }
