@@ -17,4 +17,6 @@ void obtener_total_caracteres(char ctc);
 int total_palabras();
 int total_lineas();
 int total_caracteres();
+char * texto_a_procesar();
+
 void tokenizar();

@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <ctype.h> // for isspace()
 #include <stdbool.h> // for bool, true, false
 #include "texto.h"
 #include "auxiliar.h"
@@ -38,8 +37,8 @@ void obtener_texto()
 {
     unsigned int len_max = 128;
     unsigned int current_size = 0;
-    char *pStr = malloc(len_max);
     char caracteres;
+    pStr = malloc(len_max);
     current_size = len_max;
 
     if(pStr != NULL)
@@ -54,7 +53,7 @@ void obtener_texto()
         //if i reached maximize size then realloc size
         if(i == current_size)
         {
-                        current_size = i+len_max;
+            current_size = i+len_max;
             pStr = realloc(pStr, current_size);
         }
         obtener_total_palabras(caracteres);
@@ -65,12 +64,7 @@ void obtener_texto()
 
     pStr[i] = '\0';
 
-    printf("\nLong String value: \n\n %s \n\n",pStr);
-    size_t tamanio;
-    tamanio = strlen(pStr);
-    
-    printf("Tamaño del string %d\n",tamanio);
-    
+//    printf("\nLong String value: \n\n %s \n\n",pStr);
     }
 }
 
@@ -86,7 +80,7 @@ void obtener_total_palabras(char ctp)
 {
     bool estado;
     
-    if(ctp == ' ' || ctp == '\n' || ctp == '\t')
+    if(ctp == ' ' || ctp == '\n' || ctp == '\t' || ctp == '\r')
     {
         estado = false;
     }
@@ -95,7 +89,6 @@ void obtener_total_palabras(char ctp)
         estado = true;
         ++n_palabras;
     }
-//    return n_palabras;
 }
 
 void obtener_total_lineas(char ctl)
@@ -103,14 +96,12 @@ void obtener_total_lineas(char ctl)
     //Conteo de lineas
     if(ctl == '\n')
         ++n_lineas;
-        //return n_lineas;
 }
 
 void obtener_total_caracteres(char ctc)
 {
     //Conteo de caracteres
     ++n_caracteres;
-        //   return n_caracteres;
 }
 
 
@@ -127,7 +118,51 @@ int total_caracteres()
     return n_caracteres;
 }
 
+char * texto_a_procesar()
+{
+    return pStr;
+}
 void tokenizar()
 {
+    char cc;
+    bool bp;
+    
+    unsigned char * token;
+    unsigned int ii = 0, jj = 0;
+    unsigned int t_len_max = 128;
+    unsigned int t_current_size = 0;
+    char * pstrr = texto_a_procesar();
+    token = malloc(t_len_max);
+    t_current_size = t_len_max;
+    
+    for (ii = 0;ii<total_caracteres();ii++)
+    {
+    
+        if(pstrr[ii] == ' ' || pstrr[ii] == '\n' || pstrr[ii] == '\t' || pstrr[ii] == '\r')
+        {
+            token[jj] = '\0';
+            printf("Tamaño: %d, Palabra: %s\n",strlen(token),token);
+            jj = 0;
+            bp = false;
+            free(token);
+            token = NULL;
+            token = malloc(t_len_max);
+            
+        }
+        else
+        {
+            bp = true;
+        }
+
+        if(bp == true)
+        {
+            token[jj++] = pstrr[ii];
+            if(jj == t_current_size)
+            {
+                t_current_size = jj+t_len_max;
+                token = realloc(token, t_current_size);
+            }
+        }
+    }
 
 }
