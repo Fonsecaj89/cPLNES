@@ -1,6 +1,5 @@
-             LA GUARDIA BLANCA
-
-     _NOVELA HISTÓRICA ESCRITA EN INGLÉS_
+LA GUARDIA BLANCA
+_NOVELA HISTÓRICA ESCRITA EN INGLÉS_
 
                    POR
 
@@ -20,25 +19,11 @@
         BY D. APPLETON AND COMPANY.
 
 
-_La propiedad de esta obra está protegida por la ley en
-varios países, donde se perseguirá á los que la
-reproduzcan fraudulentamente._
-
-
-
+_La propiedad de esta obra está protegida por la ley en varios países, donde se perseguirá á los que la reproduzcan fraudulentamente._
 
 Á QUIEN LEYERE.
 
-
-En la moderna literatura inglesa, menos quizás que en ninguna otra,
-espera encontrar el lector obras que por su carácter y forma le
-recuerden las narraciones históricas de tipos caballerescos, empresas
-aventuradas y altas hazañas, que han inmortalizado los nombres de
-escritores españoles, franceses é italianos. Diríase que esas novelas de
-capa y espada, galanas y airosas, en las que palpita la vida entera de
-hidalga tierra y se refleja el espíritu de toda una raza, son patrimonio
-exclusivo de otros pueblos y otros autores que los nacidos en la
-nebulosa Albión.
+En la moderna literatura inglesa, menos quizás que en ninguna otra, espera encontrar el lector obras que por su carácter y forma le recuerden las narraciones históricas de tipos caballerescos, empresas aventuradas y altas hazañas, que han inmortalizado los nombres de escritores españoles, franceses é italianos. Diríase que esas novelas de capa y espada, galanas y airosas, en las que palpita la vida entera de hidalga tierra y se refleja el espíritu de toda una raza, son patrimonio exclusivo de otros pueblos y otros autores que los nacidos en la nebulosa Albión.
 
 De aquí la novedad y el buen éxito merecidísimo de la obra de Conan
 Doyle cuya traducción castellana ofrecemos al público en este volumen.
@@ -951,6 +936,7 @@ ofrenda.
 Roger creyó hallarse en presencia de un par de duendes y aun procuró
 recordar la fórmula del exorcismo; pero los dos desconocidos
 prorrumpieron en grandes carcajadas al ver el espanto y la sorpresa
+
 reflejados en su semblante. Uno de ellos dió un salto y cayendo sobre
 las manos comenzó á andar con ellas, dando zapatetas en el aire. El otro
 preguntó:
@@ -2198,6 +2184,7 @@ casi todos los soldados de la época, reconoció fácilmente las armas y
 divisas de muchos de aquellos caballeros.
 
 --Ahí está la cabeza del Sarraceno, iba diciendo á sus compañeros; lo
+
 cual prueba que por aquí anda Sir Bernardo de Brocas, á quien esas armas
 pertenecen. Yo le ví en Poitiers, en la última acometida que dimos á los
 elegantes caballeros franceses y os aseguro que peleó como un león. Es
@@ -3586,6 +3573,7 @@ espada y casco en tiempo de paz?
 --Te diré. Es un juego que el amigo Simón se empeñó en enseñarme.
 
 --Y el bribón resultó maestro, gruñó el arquero. Me ha desplumado como
+
 si hubiese caído en manos de los ballesteros del rey de Francia. Pero
 ¡por mis pecados! que me has de devolver esos trastos, amigo, si he de
 cumplir la misión de Sir Claudio Latour, y te los pagaré como nuevos, á
@@ -4946,11 +4934,13 @@ mejor soldado de mi compañía.
 risa. El arquero Tristán es de este pueblo de Horla y la mujer es su
 madre, que le da la bienvenida á su manera.
 
+
 --¡Yo te enseñaré, holgazán, perdido, gandul! gritaba la vieja
 esgrimiendo la vara.
 
 --Poco á poco, madre, decía Tristán, que ya no ando de vago sino que soy
 arquero del rey y voy á las guerras de Francia.
+
 
 --¿Con que á Francia, bribón? Más te valiera quedarte aquí, que yo te
 daré toda la guerra que quieras, sin ir tan lejos.
@@ -7206,6 +7196,7 @@ heridas no tardó en recobrar fuerzas y buen humor, olvidado por completo
 de la fatiga de aquella mañana. Un paje le anunció que su señor se
 proponía visitar aquella noche al canciller de Chandos y deseaba que sus
 dos escuderos se alojasen en el hostal de la _Media Luna_, al fin de la
+
 calle de los Apóstoles. Al cual mesón se dirigieron Roger y Gualtero al
 anochecer, después de su larga comida y de oir los brindis y canciones
 con que pasaron rápidas las horas en compañía de los otros alegres
@@ -7516,6 +7507,7 @@ Gualtero. De otra suerte ¿cómo podrían esos artistas que nombráis
 proteger y conservar los productos de su genio?
 
 --De los cuales tenemos no pocos á la vista, agregó Roger. ¿Son todos
+
 estos trabajos de vuestra mano?
 
 --Todos. Notaréis que algunos están concluídos en diferentes placas, que
@@ -8673,6 +8665,7 @@ Morel y el risueño Gualtero, cómodamente instalados en la hostería del
 _Bâton Rouge_. El noble inglés sostenía interesante coloquio con un
 afamado caballero del Poitou, Gastón de Estela, que acababa de llegar de
 Lituania, donde había servido con los caballeros teutones á las órdenes
+
 del gran maestre de Marienberga. Complacidísimo el señor de Morel con
 aquel encuentro, se pasó las horas muertas hablando de campañas,
 asedios, justas y aventuras y amanecía cuando se despidió del de Estela.
@@ -11221,4 +11214,3 @@ dejando á las generaciones venideras un ejemplo digno de imitación y
 aplauso.
 
 FIN.
-

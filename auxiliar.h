@@ -11,6 +11,7 @@ extern char * cadena;
 void agregar_a_cadena(char* cadena, char letra);
 void final_cadena(char * cadena);
 void limpiar_cadena(char * cadena);
+char *replace_str(char *str, char *orig, char *rep);
 Lista_str * crear_lista_str(char *val);
 Lista_str * agregar_a_lista(char * ln);
 Lista_str * buscar_en_lista(char * ln, Lista_str **prev);
