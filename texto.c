@@ -9,6 +9,7 @@
 
 FILE * fp;
 char * pStr;
+char * ubicacion;
 char caracteres;
 char caracteresp;
 int n_palabras = 0;
@@ -20,18 +21,37 @@ unsigned char * txt_ppro;
 void abrir_archivo(char * filename)
 {
 
-	errno = 0;
-    fp = fopen(filename, "rb"); // open file for reading
+	char * directorio = "recursos/";
+
+	char * ubicacion = ubicacion_archivo(directorio,filename);
+	
+	fp = fopen(ubicacion, "r"); // open file for reading
     
     if (fp == NULL)
     // attempt failed
     {
         printf("Failed to open file. Bye\n");
-		printf("Error %d \n", errno);
         exit(EXIT_FAILURE);
         // quit program
     }
-   
+	printf("Archivo Abierto\n");
+	limpiar_ubicacion();
+}
+
+char * ubicacion_archivo(char * directorio, char * archivo)
+{
+	char * ubicacion = malloc(snprintf(NULL, 0, "%s%s", directorio, archivo) + 1);
+	sprintf(ubicacion, "%s%s", directorio, archivo);
+
+	printf("Abriendo Archivo -> %s\n", ubicacion);
+
+	return ubicacion;
+}
+
+void limpiar_ubicacion()
+{
+	free(ubicacion);
+	ubicacion = NULL;
 }
 
 void cerrar_archivo()
@@ -41,6 +61,7 @@ void cerrar_archivo()
 
 void obtener_texto()
 {
+	printf("Obteniendo Texto\n");
     unsigned int len_max = 250;
     unsigned int current_size = 0;
     char caracteres;
@@ -72,6 +93,7 @@ void obtener_texto()
 
     //printf("\nLong String value: \n\n %s \n\n",pStr);
     }
+	printf("Texto Obtenido\n");
 }
 
 void limpiar_pStr()
@@ -147,6 +169,7 @@ unsigned char * texto_procesado()
 
 void preprocesar_texto()
 {
+	printf("Preprocesando Texto\n");
     bool bb;
     unsigned int ii = 0, jj = 0, ln = 0, sl = 0,m=0;
     unsigned int t_len_max = 250;
@@ -194,7 +217,7 @@ void preprocesar_texto()
 
 void tokenizar()
 {
-  
+	printf("Tokenizando\n");
     bool bp;
     
     unsigned char * token;

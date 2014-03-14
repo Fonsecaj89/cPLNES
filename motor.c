@@ -17,7 +17,5 @@ int main()
 	int ta = total_archivos();
 	printf("Total Archivos guardados: %i\n",ta);
 	procesarArchivos();
-return 0;
-
-
+	return 0;
 }

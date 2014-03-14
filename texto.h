@@ -7,6 +7,8 @@ extern int n_caracteresp;
 extern unsigned char * txt_ppro;
 
 void abrir_archivo(char * filename);
+char * ubicacion_archivo(char * directorio, char * archivo);
+void limpiar_ubicacion();
 void cerrar_archivo();
 
 void obtener_texto();

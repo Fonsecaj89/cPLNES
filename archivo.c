@@ -37,12 +37,14 @@ int listdir(const char *path)
 		lista_agregar(&node_head,nombre_archivo);
 	}
 }
-
-/*void ver_lista()
+/*
+void ver_lista()
 {
 	printf("La lista tiene %i items\n",longitud_lista(&node_head));
 	print_lista(&node_head);
-}*/
+}
+*/
+
 void cerrar_directorio()
 {
 	closedir(dp);
@@ -56,6 +58,7 @@ void procesarArchivos()
 	while(node_head)
     {
 		nombre_archivo = node_head->data;
+
 		if(aux == NULL)
 		{
 			aux =  nombre_archivo;
@@ -66,17 +69,16 @@ void procesarArchivos()
 				printf("");
 			else
 			{
-				printf("%c\n",nombre_archivo[2]);
-				printf("Abriendo datos\n");
-				//	abrir_archivo(nombre_archivo);
-				/*		obtener_texto();
+				abrir_archivo(nombre_archivo);
+				obtener_texto();
 				preprocesar_texto();
 				tokenizar();
 				limpiar_pStr();
 				printf("Total de palabras: %d\n",total_palabras());
 				printf("Total de lineas: %d\n",total_lineas());
-				printf("Total de caracteres: %d\n",total_caracteres());*/
+				printf("Total de caracteres: %d\n",total_caracteres());
 				cerrar_archivo();
+			    printf("\n\n");
 			}
 		}
 		else

@@ -7,9 +7,9 @@ texto.o: texto.c texto.h auxiliar.h
 archivo.o: archivo.c archivo.h auxiliar.h texto.h
 	gcc -c -std=c99 -g archivo.c
 
-motor.o: motor.c  archivo.h 
+motor.o: motor.c motor.h archivo.h 
 	gcc -c -std=c99 -g motor.c
 
-cplnes: motor.o auxiliar.o archivo.o texto.o
-	gcc archivo.o texto.o motor.o auxiliar.o -o cplnes && ./cplnes
+cplnes: motor.o archivo.o texto.o auxiliar.o
+	gcc motor.o archivo.o texto.o auxiliar.o -o cplnes && ./cplnes
 
