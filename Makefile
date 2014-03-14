@@ -1,9 +1,15 @@
 auxiliar.o: auxiliar.c auxiliar.h
 	gcc -c -std=c99 -g auxiliar.c
+
 texto.o: texto.c texto.h auxiliar.h
 	gcc -c -std=c99 -g texto.c
-motor.o: motor.c texto.h 
+
+archivo.o: archivo.c archivo.h auxiliar.h texto.h
+	gcc -c -std=c99 -g archivo.c
+
+motor.o: motor.c  archivo.h 
 	gcc -c -std=c99 -g motor.c
-cplnes: texto.o motor.o auxiliar.o
-	gcc texto.o motor.o auxiliar.o -o cplnes && ./cplnes
+
+cplnes: motor.o auxiliar.o archivo.o texto.o
+	gcc archivo.o texto.o motor.o auxiliar.o -o cplnes && ./cplnes
 

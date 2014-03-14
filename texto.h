@@ -6,7 +6,7 @@ extern int n_caracteres;
 extern int n_caracteresp;
 extern unsigned char * txt_ppro;
 
-void abrir_archivo(char *aa_filename);
+void abrir_archivo(char * filename);
 void cerrar_archivo();
 
 void obtener_texto();

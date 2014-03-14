@@ -6,10 +6,8 @@
 
 /*Variables globales*/
 
-Lista_str *head = NULL;
-Lista_str *curr = NULL;
 char * cadena;
-
+Node *node_head = NULL;
 
 /* ***********************************************
  * Manejo de String
@@ -38,7 +36,7 @@ void limpiar_cadena(char * cadena)
     
 }
 
-char *replace_str(char *str, char *orig, char *rep)
+char *reemplazar_string(char *str, char *orig, char *rep)
 {
   static char buffer[4096];
   char *p;
@@ -53,123 +51,105 @@ char *replace_str(char *str, char *orig, char *rep)
 
   return buffer;
 }
+
+
+
 /* ***********************************************
- * Ejemplo de Manejo de Listas
+ * Manejo de Listas
  * *********************************************** */
-Lista_str * crear_lista_str(char * ln)
+int longitud_lista(Node **node_head)
 {
-    Lista_str *ptr = (Lista_str*)malloc(sizeof(Lista_str));
-    if(NULL == ptr)
+    Node *node_curr = *node_head;
+    int len = 0;
+     
+	if(!node_curr)
     {
-        printf("\n Node creation failed \n");
-        return NULL;
-    }
-    ptr->item_str = "";
-    ptr->next = NULL;
-
-    head = curr = ptr;
-
-    
-    return ptr;
-}
-
-Lista_str * agregar_a_lista(char * ln)
-{
-    if(NULL == head)
+	    return len;
+	}
+    else
     {
-        crear_lista_str(ln);
-    }
-
-    Lista_str *ptr = (Lista_str*)malloc(sizeof(Lista_str));
-    if(NULL == ptr)
-    {
-        printf("\n Node creation failed \n");
-        return NULL;
-    }
-    ptr->item_str = ln;
-    ptr->next = NULL;
-    curr->next = ptr;
-    curr = ptr;
-
-    return ptr;
-}
-
-Lista_str * buscar_en_lista(char * ln, Lista_str **prev)
-{
-    Lista_str *ptr = head;
-    Lista_str *tmp = NULL;
-    bool found = false;
-
-    printf("\n Searching the list for value [%s] \n",ln);
-
-    while(ptr != NULL)
-    {
-        if(ptr->item_str == ln)
+	    while(node_curr)
         {
-            found = true;
-            break;
+            ++len;
+            node_curr = node_curr -> next;
         }
+        return len;
+	}
+
+}
+ 
+void lista_agregar_inicio(Node **node_head, stack_data d)
+{
+    Node *node_new = malloc(sizeof(Node));
+     
+    node_new -> data = d;
+    node_new -> next = *node_head;
+    *node_head = node_new;
+}
+ 
+stack_data lista_eliminar_item(Node **node_head)
+{
+    Node *node_togo = *node_head;
+    stack_data d;
+     
+    if(node_head)
+    {
+        d = node_togo -> data;
+        *node_head = node_togo -> next;
+        free(node_togo);
+    }
+    return d;
+}
+ 
+void print_lista(Node **node_head)
+{
+    Node *node_curr = *node_head;
+     
+    if(!node_curr)
+        puts("the stack is empty");
+    else
+    {
+        while(node_curr)
+        {
+            printf("%s ", node_curr -> data); //set for integers, modifiable
+            node_curr = node_curr -> next;
+        }
+        putchar('\n');
+    }
+}
+ 
+void eliminar_lista(Node **node_head)
+{
+    while(*node_head)
+        lista_eliminar_item(node_head);
+}
+ 
+void lista_agregar(Node **node_head, stack_data d)
+{
+    Node *node_curr = *node_head;
+     
+    if(!node_curr)
+        lista_agregar_inicio(node_head, d);
+    else
+    {
+        //find the last node
+        while(node_curr -> next)
+            node_curr = node_curr -> next;
+        //build the node after it
+        lista_agregar_inicio(&(node_curr -> next), d);
+    }
+}
+ 
+int lista_buscar(Node **node_head, stack_data d)
+{
+    Node *node_curr = *node_head;
+     
+    while(node_curr)
+    {
+        if(node_curr -> data == d) //set for numbers, modifiable
+            return 1;
         else
-        {
-            tmp = ptr;
-            ptr = ptr->next;
-        }
+            node_curr = node_curr -> next;
     }
-
-    if(true == found)
-    {
-        if(prev)
-            *prev = tmp;
-        return ptr;
-    }
-    else
-    {
-        return NULL;
-    }
-}
-
-int borrar_de_lista(char * ln)
-{
-    Lista_str *prev = NULL;
-    Lista_str *del = NULL;
-
-    printf("\n Deleting value [%s] from list\n",ln);
-
-    del = buscar_en_lista(ln,&prev);
-    if(del == NULL)
-    {
-        return -1;
-    }
-    else
-    {
-        if(prev != NULL)
-            prev->next = del->next;
-
-        if(del == curr)
-        {
-            curr = prev;
-        }
-        else if(del == head)
-        {
-            head = del->next;
-        }
-    }
-
-    free(del);
-    del = NULL;
-
     return 0;
-}
-
-void imprimir_lista()
-{
-    Lista_str *ptr = head;
-
-    while(ptr != NULL)
-    {
-        printf("%s\n",ptr->item_str);
-        ptr = ptr->next;
-    }
-
-    return;
 }

@@ -19,14 +19,16 @@ unsigned char * txt_ppro;
 
 void abrir_archivo(char * filename)
 {
-    printf("%s\n",setlocale (LC_ALL, ""));    
-    fp = fopen(filename, "r"); // open file for reading
+
+	errno = 0;
+    fp = fopen(filename, "rb"); // open file for reading
     
     if (fp == NULL)
     // attempt failed
     {
         printf("Failed to open file. Bye\n");
-        exit(1);
+		printf("Error %d \n", errno);
+        exit(EXIT_FAILURE);
         // quit program
     }
    
@@ -187,11 +189,12 @@ void preprocesar_texto()
         }
     }
     txt_ppro[jj] = '\0';
-    //printf("\nArchivo procesado\n%s\nTamaño: %d\n",txt_ppro,strlen(txt_ppro));
+//    printf("\nArchivo procesado\n%s\nTamaño: %d\n",txt_ppro,strlen(txt_ppro));
 }
 
 void tokenizar()
 {
+  
     bool bp;
     
     unsigned char * token;
@@ -218,7 +221,6 @@ void tokenizar()
         {
             token[jjj] = '\0';
             //printf("Tamaño: %d, Palabra: %s\n",strlen(token),token);
-			printf("%s ",token);
             jjj = 0;
             bp = false;
             free(token);

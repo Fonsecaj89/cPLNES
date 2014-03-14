@@ -7,39 +7,17 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
-#include "texto.h"
-#include "auxiliar.h"
+#include "archivo.h"
 
 
 int main()
 {
 
-    int ch;
+	listdir("recursos/");
+	int ta = total_archivos();
+	printf("Total Archivos guardados: %i\n",ta);
+	procesarArchivos();
+return 0;
 
-    printf("Abriendo datos\n");
-    abrir_archivo("datos.txt");
-    obtener_texto();
-    limpiar_pStr();
-    printf("Total de palabras: %d\n",total_palabras());
-    printf("Total de lineas: %d\n",total_lineas());
-    printf("Total de caracteres: %d\n",total_caracteres());
-    cerrar_archivo();
-	limpiar_pStr();
-	
-    
-    abrir_archivo("1816_La-guardia-blanca_Arthur-Conan-Doyle.txt");
-    obtener_texto();
-    preprocesar_texto();
-
-	tokenizar();
-
-
-    limpiar_pStr();
-    printf("Total de palabras: %d\n",total_palabras());
-    printf("Total de lineas: %d\n",total_lineas());
-    printf("Total de caracteres: %d\n",total_caracteres());
-    cerrar_archivo();
-    
-    return 0;
 
 }
