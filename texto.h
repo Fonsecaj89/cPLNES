@@ -26,8 +26,10 @@ int total_caracteres();
 int total_caracteres_procesados();
 
 char * texto_a_procesar();
+char * codificar_texto();
 unsigned char * texto_procesado();
 
-void tokenizar();
 void preprocesar_texto();
+void tokenizar();
+
 

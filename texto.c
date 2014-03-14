@@ -2,6 +2,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdarg.h>
+#include <iconv.h>
+#include <errno.h>
 #include <stdbool.h> // for bool, true, false
 #include "texto.h"
 #include "auxiliar.h"
@@ -9,6 +12,7 @@
 
 FILE * fp;
 char * pStr;
+char * texto_convertido;
 char * ubicacion;
 char caracteres;
 char caracteresp;
@@ -17,6 +21,11 @@ int n_lineas = 0;
 int n_caracteres = 0;
 int n_caracteresp = 0;
 unsigned char * txt_ppro;
+
+/* The names of the input and output encodings. */
+const char * LATINSET = "ISO-8859-1";
+const char * OUTSET = "UTF-8";
+
 
 void abrir_archivo(char * filename)
 {
@@ -167,6 +176,96 @@ unsigned char * texto_procesado()
     return txt_ppro;
 }
 
+
+char * codificar_texto()
+{
+	int v;
+	char * utf8;
+    unsigned int len;
+    unsigned int utf8len;
+	size_t icodificacion;
+	iconv_t codificaciones;
+	/* The variables with "start" in their name are solely for display of what the function is doing. As iconv runs, it alters the values of the variables, so these are for keeping track of the start points and start lengths. */
+	int len_start;
+    int utf8len_start;
+    const char * euc_start;
+    
+
+	/*Inicio de la conexion con la libreria iconv*/
+	char * a_procesar = texto_a_procesar();
+
+    codificaciones = iconv_open(OUTSET, LATINSET);
+
+    if ((int) codificaciones == -1)
+	{
+		/* Initialization failure. */
+		if (errno == EINVAL) {
+			fprintf (stderr,"La conversion de '%s' a '%s' no esta soportada.\n", LATINSET, OUTSET);
+		}
+		else
+		{
+			fprintf (stderr, "Initialization failure: %s\n",strerror (errno));
+		}
+		exit (1);
+    }
+
+    /* Codificacion del texto*/
+    len = strlen(a_procesar);
+    if (!len)
+	{
+		fprintf (stderr, "Input string is empty.\n");
+		return (0);
+    }
+
+    /* Assign enough space to put the UTF-8. */
+    utf8len = 2*len;
+    utf8 = calloc (utf8len, 1);
+    /* Keep track of the variables. */
+    len_start = len;
+    utf8len_start = utf8len;
+    texto_convertido = utf8;
+    euc_start = a_procesar;
+
+	icodificacion = iconv(codificaciones, &a_procesar, & len, & utf8, & utf8len);
+
+    /* Handle failures. */
+    if (icodificacion == (size_t) -1)
+	{
+		fprintf (stderr, "iconv failed: in string '%s', length %d, out string '%s', length %d\n", a_procesar, len, texto_convertido, utf8len);
+		switch (errno)
+		{
+			/* See "man 3 iconv" for an explanation. */
+	        case EILSEQ:
+				fprintf (stderr, "Invalid multibyte sequence.\n");
+				break;
+	        case EINVAL:
+				fprintf (stderr, "Incomplete multibyte sequence.\n");
+				break;
+  	        case E2BIG:
+				fprintf (stderr, "No more room.\n");
+				break;
+	        default:
+				fprintf (stderr, "Error: %s.\n", strerror (errno));
+		}
+		exit (1);
+    }
+
+   /*Finalizacion de la conexion con la libreria de conversion */
+    v = iconv_close (codificaciones);
+    if (v != 0)
+	{
+		fprintf (stderr, "iconv_close failed: %s\n", strerror (errno));
+		exit (1);
+	}
+
+	/*Mostrar El texto codificado*/
+	if (texto_convertido) {
+		printf ("Final iconv output: \n%s\n", texto_convertido);
+    }
+	
+	return texto_convertido;
+}
+
 void preprocesar_texto()
 {
 	printf("Preprocesando Texto\n");
@@ -174,7 +273,7 @@ void preprocesar_texto()
     unsigned int ii = 0, jj = 0, ln = 0, sl = 0,m=0;
     unsigned int t_len_max = 250;
     unsigned int t_current_size = 0;
-    char * ppstr = texto_a_procesar();
+    char * ppstr = codificar_texto();
     txt_ppro = malloc(t_len_max);
     t_current_size = t_len_max;
     
@@ -212,7 +311,7 @@ void preprocesar_texto()
         }
     }
     txt_ppro[jj] = '\0';
-//    printf("\nArchivo procesado\n%s\nTamaño: %d\n",txt_ppro,strlen(txt_ppro));
+    printf("\nArchivo procesado\n%s\nTamaño: %d\n",txt_ppro,strlen(txt_ppro));
 }
 
 void tokenizar()
